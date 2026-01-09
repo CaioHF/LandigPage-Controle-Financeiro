@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Finanças - Controle Financeiro Simples</title>
+
+    <meta name="description" content="Sistema simples para controle financeiro pessoal. Organize seus gastos sem planilhas, sem mensalidade e com acesso vitalício.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2488/2488749.png">
+
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --accent: #16A34A;
+            --text-dark: #0F172A;
+            --text-gray: #475569;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* BOTÕES */
+        .btn-cta {
+            background-color: var(--accent);
+            color: white;
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-cta:hover { transform: translateY(-3px); background-color: #15803d; }
+        .btn-cta i { margin-right: 8px; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #1E3A8A 0%, #1e40af 100%);
+            color: white;
+            padding: 70px 0 120px; /* Aumentei padding bottom p/ encaixar imagem */
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        /* IMAGEM PRINCIPAL (1) */
+        .demo-img-container {
+            margin-top: -80px;
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 60px;
+        }
+        .demo-img {
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 8px solid white;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* FEATURES */
+        .features { padding: 60px 0; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 50px; color: var(--primary); }
+        .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: white; padding: 30px; border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;
+            border-bottom: 4px solid var(--primary); transition: 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+
+        /* DETALHES & IMAGEM 2 */
+        .details { background: white; padding: 80px 0; }
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .check-list { list-style: none; }
+        .check-list li { margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; }
+        .check-list li i { color: var(--accent); margin-right: 12px; font-size: 1.3rem; }
+        
+        .img-mobile-styled {
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 6px solid #f1f5f9;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* GALERIA (IMAGENS 3 E 4) */
+        .gallery-section { padding: 80px 0; background-color: var(--bg-light); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .gallery-img {
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid white;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+        .gallery-img:hover { transform: scale(1.02); }
+
+        /* TRANSPARÊNCIA */
+        .transparency { background: #1e293b; color: white; padding: 70px 0; text-align: center; }
+        .warning-box {
+            border: 1px solid #f59e0b; background: rgba(245, 158, 11, 0.1);
+            padding: 20px; border-radius: 8px; max-width: 700px;
+            margin: 30px auto 0; text-align: left;
+        }
+
+        /* PREÇO */
+        .pricing { padding: 80px 0; text-align: center; }
+        .price-card {
+            background: white; max-width: 400px; margin: 0 auto; padding: 40px;
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary); position: relative;
+        }
+        .tag-oferta {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: white; padding: 5px 20px;
+            border-radius: 20px; font-weight: bold; font-size: 0.9rem;
+        }
+        .price-old { text-decoration: line-through; color: var(--text-gray); }
+        .price-new { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
+
+        /* FAQ & FOOTER */
+        .faq { padding: 60px 0; max-width: 800px; margin: 0 auto; }
+        details { background: white; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        summary { padding: 20px; cursor: pointer; font-weight: 600; list-style: none; position: relative; }
+        summary::after { content: '+'; position: absolute; right: 20px; font-size: 1.5rem; }
+        details[open] summary::after { content: '-'; }
+        .faq-content { padding: 0 20px 20px; color: var(--text-gray); }
+        footer { background: white; padding: 40px 0; text-align: center; font-size: 0.9rem; color: var(--text-gray); border-top: 1px solid #e2e8f0; }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .details-grid { grid-template-columns: 1fr; text-align: center; }
+            .details-grid img { margin-top: 30px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .check-list li { justify-content: center; } /* Centralizar lista no mobile */
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="container">
+        <h1>Finalmente controle seu dinheiro<br>sem planilhas, sem mensalidade e sem complicação.</h1>
+        <p>Saiba exatamente para onde vai seu dinheiro, evite gastos desnecessários e tenha mais controle todo mês.</p>
+        <a href="#pricing" class="btn-cta"><i class="fa-solid fa-cart-shopping"></i> Quero Me Organizar Agora</a>
+    </div>
+</header>
+
+<div class="demo-img-container">
+    <img src="imagem1.jpeg" alt="Dashboard do Sistema" class="demo-img">
+</div>
+
+<section class="features container">
+    <h2 class="section-title">Por que usar o Minhas Finanças?</h2>
+    <div class="grid-features">
+        <div class="feature-card">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <h3>Funciona no Celular</h3>
+            <p>Instale como app (PWA) no Android ou iPhone e acesse offline.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-chart-pie"></i>
+            <h3>Visão Clara</h3>
+            <p>Veja exatamente onde está gastando seu dinheiro com relatórios.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Simples de Usar</h3>
+            <p>Sem cadastro complicado. Abriu, usou. Pagamento único.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Seus Dados São Seus</h3>
+            <p>Armazenamento local seguro com opção de backup e exportação.</p>
+        </div>
+    </div>
+</section>
+
+<section class="details">
+    <div class="container details-grid">
+        <div>
+            <h2 style="color:var(--primary); margin-bottom:20px;">Tudo o que você precisa</h2>
+            <ul class="check-list">
+                <li><i class="fa-solid fa-check-circle"></i> Receitas e Despesas</li>
+                <li><i class="fa-solid fa-check-circle"></i> Contas Fixas automáticas</li>
+                <li><i class="fa-solid fa-check-circle"></i> Metas com progresso</li>
+                <li><i class="fa-solid fa-check-circle"></i> Controle de empréstimos</li>
+                <li><i class="fa-solid fa-check-circle"></i> Dashboard mensal</li>
+                <li><i class="fa-solid fa-check-circle"></i> Modo escuro</li>
+                <li><i class="fa-solid fa-check-circle"></i> Funciona offline</li>
+            </ul>
+            <p style="margin-top:15px; color:var(--text-gray);">
+                Comece hoje e tenha mais controle já no próximo mês.
+            </p>
+            <a href="#pricing" class="btn-cta" style="margin-top:20px;">Garantir Meu Acesso</a>
+        </div>
+        <div>
+            <img src="imagem2.jpeg" alt="App no celular" class="img-mobile-styled">
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <div class="container">
+        <h2 class="section-title">Interface Moderna e Intuitiva</h2>
+        <p style="text-align: center; color: var(--text-gray); max-width: 600px; margin: 0 auto;">
+            Projetado para facilitar sua vida. Alterne entre modo claro e escuro e visualize seus dados como preferir.
+        </p>
+        
+        <div class="gallery-grid">
+            <div>
+                <img src="imagem3.jpeg" alt="Modo Escuro" class="gallery-img">
+                <p style="text-align: center; margin-top: 10px; font-weight: bold; color: var(--text-gray);">Modo Escuro Elegante</p>
+            </div>
+            
+            <div>
+                <img src="imagem4.jpeg" alt="Relatórios" class="gallery-img">
+                <p style="text-align: center; margin-top: 10px; font-weight: bold; color: var(--text-gray);">Relatórios e Metas</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="transparency">
+    <div class="container">
+        <h2>Como funciona?</h2>
+        <div class="warning-box">
+            <p><strong>💾 Armazenamento Local</strong></p>
+            <p>Os dados ficam salvos no seu dispositivo. Você pode exportar para Excel e restaurar backups sempre que quiser.</p>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="pricing">
+    <div class="container">
+        <div class="price-card">
+            <div class="tag-oferta">OFERTA ESPECIAL</div>
+            <h3>Acesso Vitalício</h3>
+            <div class="price-old">de R$ 39,90</div>
+            <div class="price-new">R$ 9,90</div>
+            <p>Pagamento único. Sem mensalidade.</p>
+
+            <ul class="check-list" style="margin:20px 0; text-align:left;">
+                <li><i class="fa-solid fa-check"></i> Acesso imediato</li>
+                <li><i class="fa-solid fa-check"></i> Atualizações futuras</li>
+                <li><i class="fa-solid fa-check"></i> Uso ilimitado</li>
+            </ul>
+
+            <a href="SEU_LINK_KIWIFY_AQUI" class="btn-cta" style="width:100%;">
+                <i class="fa-solid fa-lock"></i> Comprar Agora
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="faq container">
+    <h2 class="section-title">Perguntas Frequentes</h2>
+
+    <details>
+        <summary>Preciso pagar todo mês?</summary>
+        <div class="faq-content">Não. O pagamento é único.</div>
+    </details>
+
+    <details>
+        <summary>Funciona no iPhone e Android?</summary>
+        <div class="faq-content">Sim, direto no navegador ou instalado como app.</div>
+    </details>
+
+    <details>
+        <summary>Preciso de internet?</summary>
+        <div class="faq-content">Somente no primeiro acesso. Depois funciona offline.</div>
+    </details>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Minhas Finanças</p>
+        <p>Contato: caiohf01@gmail.com</p>
+    </div>
+</footer>
+
+</body>
+</html>
